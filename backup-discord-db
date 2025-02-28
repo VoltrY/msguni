@@ -1,0 +1,5 @@
+#!/bin/bash
+BACKUP_DIR="/var/backups/mysql"
+mkdir -p $BACKUP_DIR
+mysqldump -u your_db_user -p'your_db_password' unimsg | gzip > "$BACKUP_DIR/unimsg_$(date +%Y%m%d).sql.gz"
+find $BACKUP_DIR -type f -mtime +7 -delete
