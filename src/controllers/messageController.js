@@ -1,4 +1,5 @@
-import { Message, User, Channel } from '../models/index.js';
+import { Message, User, Channel, GuildMember } from '../models/index.js';
+import { Op } from 'sequelize';
 import { ApiError } from '../utils/ApiError.js';
 import { io } from '../app.js';
 

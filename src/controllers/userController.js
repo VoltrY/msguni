@@ -1,4 +1,5 @@
 import { User } from '../models/index.js';
+import { Op } from 'sequelize';
 import { ApiError } from '../utils/ApiError.js';
 
 export const getMe = async (req, res, next) => {

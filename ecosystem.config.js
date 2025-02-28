@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   apps: [{
     name: 'unimsg-api',
     script: 'src/app.js',

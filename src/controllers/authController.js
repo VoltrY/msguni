@@ -1,4 +1,5 @@
 import jwt from 'jsonwebtoken';
+import { Op } from 'sequelize';
 import { User } from '../models/index.js';
 import { ApiError } from '../utils/ApiError.js';
 
