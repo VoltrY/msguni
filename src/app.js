@@ -5,6 +5,7 @@ import { createServer } from 'http';
 import { Server } from 'socket.io';
 import dotenv from 'dotenv';
 import rateLimit from 'express-rate-limit';
+import { connectToDatabase } from '../lib/db.js';
 
 import { sequelize } from './config/database.js';
 import { errorHandler } from './middleware/errorHandler.js';
@@ -48,11 +49,24 @@ setupRoutes(app);
 // Setup Socket.IO
 setupSocketIO(io);
 
+// API rotaları
+app.get('/api/messages', async (req, res) => {
+  try {
+    const db = await connectToDatabase();
+    const [rows] = await db.query('SELECT * FROM messages');
+    await db.end();
+    res.json(rows);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Veritabanı hatası' });
+  }
+});
+
 // Error handling middleware
 app.use(errorHandler);
 
 // Database connection and server start
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 
 async function startServer() {
   try {
